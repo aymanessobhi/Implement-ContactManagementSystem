@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -71,26 +72,80 @@ public class ContactMangementSystem {
     }
 
     private void searchContact(){
-
+        System.out.println("Enter contact name to search: ");
+        String name = scanner.nextLine();
+        boolean found = false;
+        for (Contact contact : contacts){
+            if(contact.getName().equalsIgnoreCase(name)){
+                displayContact(contact);
+                found = true;
+                break;
+            }
+        }
+        if (!found){
+            System.out.println("Contact not found");
+        }
+        System.out.println();
     }
 
     private void updateContact(){
+        System.out.println("Enter contact name to update: ");
+        String name = scanner.nextLine();
 
+        Contact contact = findContactByName(name);
+        if(contact !=null){
+            System.out.print("Enter new phone number: ");
+            String phoneNumber = scanner.nextLine();
+            System.out.println("Enter new email");
+            String email = scanner.nextLine();
+
+            contact.setPhoneNumber(phoneNumber);
+            contact.setEmail(email);
+            System.out.println("Contact updated successfully!");
+        }else{
+            System.out.println("Contact not found");
+        }
+        System.out.println();
     }
 
     private void deleteContact(){
-
+        System.out.println("Enter contact name to delete: ");
+        String name = scanner.nextLine();
+        Contact contact = findContactByName(name);
+        if(contact!=null){
+            contacts.remove(contact);
+            System.out.println("Contact deleted successfully!");
+        }else {
+            System.out.println("Contact not found!");
+        }
+        System.out.println();
     }
 
     private void displayContacts(){
-
+        if(contacts.isEmpty()){
+            System.out.println("No Contacts found!");
+        }else {
+            System.out.println("===== All Contacts =====");
+            for (Contact contact:contacts){
+                displayContact(contact);
+            }
+        }
+        System.out.println();
     }
 
     private void displayContact(Contact contact){
-
+        System.out.println("Name : "+contact.getName());
+        System.out.println("Phone Number: "+ contact.getPhoneNumber());
+        System.out.println("Email: "+contact.getEmail());
+        System.out.println("--------------------------");
     }
 
     private Contact findContactByName(String name){
+        for (Contact contact:contacts){
+            if(contact.getName().equalsIgnoreCase(name)){
+                return contact;
+            }
+        }
         return null;
     }
 }
