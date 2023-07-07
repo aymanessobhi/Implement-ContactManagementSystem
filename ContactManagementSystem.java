@@ -1,13 +1,12 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ContactMangementSystem {
+public class ContactManagementSystem {
     private static List<Contact> contacts = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        ContactMangementSystem system = new ContactMangementSystem();
+        ContactManagementSystem system = new ContactManagementSystem();
         system.run();
     }
     private void run(){
